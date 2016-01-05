@@ -1,6 +1,6 @@
 class CanvasLoadsController < ApplicationController
   include ActionController::Live
-  
+
   Mime::Type.register "text/event-stream", :stream
 
   before_action :set_canvas_load, only: [:show, :setup_course]
@@ -21,7 +21,7 @@ class CanvasLoadsController < ApplicationController
   def create
     @canvas_load = current_user.canvas_loads.build(canvas_load_params)
     @canvas_load.canvas_domain = current_user.authentications.find_by(provider: 'canvas').provider_url
-    if @canvas_load.save    
+    if @canvas_load.save
       render :create
     else
       render :new
@@ -41,7 +41,7 @@ class CanvasLoadsController < ApplicationController
     # users to be enrolled in existing courses not just the courses that were added in this iteration.
     enroll_in_existing_courses = false
 
-    # We can update existing courses if we want to add an option to the UI. For now just create new ones. 
+    # We can update existing courses if we want to add an option to the UI. For now just create new ones.
     always_create_courses = true
 
     begin
@@ -52,7 +52,7 @@ class CanvasLoadsController < ApplicationController
         if valid_teacher = @canvas_load.check_sis_id
           response.stream.write "Found valid user for teacher role.\n\n"
         else
-          response.stream.write "Found no valid user for teacher role.\n\n" 
+          response.stream.write "Found no valid user for teacher role.\n\n"
         end
       end
 
@@ -81,7 +81,7 @@ class CanvasLoadsController < ApplicationController
       users = {}
       sample_users.each do |user|
         result = @canvas_load.find_or_create_user(user, sub_account_id)
-        if result[:user] 
+        if result[:user]
           users[user[:email]] = result[:user]
           if result[:existing]
             response.stream.write "Found existing user: #{user[:name]}.\n\n"
@@ -100,7 +100,7 @@ class CanvasLoadsController < ApplicationController
       migrations = {}
       @canvas_load.courses.each do |course|
         result = @canvas_load.find_or_create_course(course, sub_account_id, always_create_courses)
-        sis_id = course.sis_course_id || 'welcome' # The welcome course returns a null sis id.
+        sis_id = course.sis_course_id
         courses[sis_id] = result[:course]
         migrations[sis_id] = result[:migration] if result[:migration]
         if result[:existing]
@@ -112,7 +112,7 @@ class CanvasLoadsController < ApplicationController
 
       if users.present?
         response.stream.write "Adding Enrollments -------------------------------\n\n"
-        
+
         if valid_teacher
           courses.each do |sis_course_id, course|
             @canvas_load.ensure_enrollment(valid_teacher['id'], course['id'], 'teacher')
@@ -152,14 +152,14 @@ class CanvasLoadsController < ApplicationController
           end
         end
       end
-    
+
       # Setup LTI tools
       if sub_account_id
         courses.each do |sis_course_id, course|
           if @canvas_load.lti_attendance
             params = @canvas_load.lti_tool_params(
-              Rails.application.secrets.lti_attendance_key, 
-              Rails.application.secrets.lti_attendance_secret, 
+              Rails.application.secrets.lti_attendance_key,
+              Rails.application.secrets.lti_attendance_secret,
               'https://rollcall.instructure.com/configure.xml')
             tool = @canvas_load.add_lti_tool(params, course['id'], sub_account_id)
             response.stream.write "Added Attendance LTI tool to #{course['course_code']}\n\n"
@@ -167,7 +167,7 @@ class CanvasLoadsController < ApplicationController
           if @canvas_load.lti_chat
             params = @canvas_load.lti_tool_params(
               Rails.application.secrets.lti_chat_key,
-              Rails.application.secrets.lti_chat_secret, 
+              Rails.application.secrets.lti_chat_secret,
               'https://chat.instructure.com/lti/configure.xml')
             tool = @canvas_load.add_lti_tool(params, course['id'], sub_account_id)
             response.stream.write "Added Chat LTI tool to #{course['course_code']}\n\n"
@@ -204,12 +204,12 @@ class CanvasLoadsController < ApplicationController
       ['discussions', 'assignments', 'quizzes', 'conversations'].each do |type|
         response.stream.write "Adding #{type} -------------------------------\n\n"
         items = samples(type)
-        
+
         case type
         when 'discussions'
           items = items.sort_by{|i| (i[:reply] || 'n').downcase} # Put all the 'n' records first. These should be the root posts.
         end
-        
+
         items.each do |item|
           if course = courses[item[:sis_course_id]]
             case type
@@ -231,7 +231,7 @@ class CanvasLoadsController < ApplicationController
               end
             when 'quizzes'
               #result = @canvas_load.create_quiz(course['id'], item)
-            
+
             when 'conversations'
               if user = users[item[:user_id]]
                 result = @canvas_load.create_conversation(user['id'], course['id'], item)
@@ -297,8 +297,8 @@ class CanvasLoadsController < ApplicationController
 
     def map_array(data, reject_fields)
       header = data[0].map{|v| v.present? ? v.downcase : ''}
-      results = data[1..data.length].map do |d| 
-        header.each_with_index.inject({}) do |result, (key, index)| 
+      results = data[1..data.length].map do |d|
+        header.each_with_index.inject({}) do |result, (key, index)|
           if val = d[index]
             result[key.to_sym] = val.strip unless reject_fields.include?(key)
           end

@@ -1,7 +1,7 @@
 class CanvasLoad < ActiveRecord::Base
   belongs_to :user
   has_many :courses
-  
+
   attr_accessor :response
 
   accepts_nested_attributes_for :courses, reject_if: proc { |a| a['is_selected'] != '1' }
@@ -32,7 +32,7 @@ class CanvasLoad < ActiveRecord::Base
       self.courses.create!(content: {
         course_code: "welcome-to-canvas",
         name: welcome_to_canvas_name,
-        sis_course_id: nil,
+        sis_course_id: "welcome-to-canvas",
         status: "active",
         cartridge: "https://s3.amazonaws.com/SSL_Assets/sales/demo_courses/2015/welcome-to-canvas-export.imscc"
       }.to_json)
@@ -84,10 +84,10 @@ class CanvasLoad < ActiveRecord::Base
         raise ex
       end
   end
- 
+
   def find_or_create_course(course, sub_account_id, always_create_courses = false)
 
-    existing_course = search_courses(sub_account_id).find{|cc| course.course_code == cc['course_code']}  
+    existing_course = search_courses(sub_account_id).find{|cc| course.course_code == cc['course_code']}
 
     if !always_create_courses && existing_course
       return {
@@ -95,11 +95,11 @@ class CanvasLoad < ActiveRecord::Base
         existing: true
       }
     end
-    
+
     course_params = course.parsed
 
     if existing_course
-      course_params[:sis_course_id] = "#{course_params[:sis_course_id]}_#{DateTime.now}" 
+      course_params[:sis_course_id] = "#{course_params[:sis_course_id]}_#{DateTime.now}"
     end
 
     if course_params[:name] != welcome_to_canvas_name
@@ -121,7 +121,7 @@ class CanvasLoad < ActiveRecord::Base
     end
 
     course.update_attributes!(canvas_course_id: canvas_course['id'], canvas_account_id: canvas_course['account_id'])
-    
+
     migration = canvas.migrate_content(canvas_course['id'], {
       migration_type: 'common_cartridge_importer',
       settings: {
@@ -139,7 +139,7 @@ class CanvasLoad < ActiveRecord::Base
       migration: migration,
       existing: false
     }
-    
+
   end
 
   def current_users
@@ -173,9 +173,9 @@ class CanvasLoad < ActiveRecord::Base
       }
       user = canvas.create_user(user_params, sub_account_id)
     end
-    
+
     add_avatar(user, params)
-    
+
     {
       user: user,
       existing: false
@@ -184,7 +184,7 @@ class CanvasLoad < ActiveRecord::Base
   rescue Canvas::ApiError => ex
     debugger
     return {
-      error: ex    
+      error: ex
     }
   end
 
@@ -207,7 +207,7 @@ class CanvasLoad < ActiveRecord::Base
   def create_assignment_submission(user_id, course_id, assignment)
     @assignments ||= {}
     @assignments[course_id] ||= canvas.get_assignments(course_id)
-    
+
     # Find the assignment we are submitting to.
     if found = @assignments[course_id].find{|a| a['name'].strip.downcase == assignment[:name].strip.downcase}
 
@@ -218,10 +218,10 @@ class CanvasLoad < ActiveRecord::Base
       end
       canvas.create_assignment_submission(
         user_id,
-        course_id, 
-        found['id'], 
-        assignment[:comment], 
-        assignment[:type].strip, 
+        course_id,
+        found['id'],
+        assignment[:comment],
+        assignment[:type].strip,
         body,
         url
       )
@@ -329,7 +329,7 @@ class CanvasLoad < ActiveRecord::Base
   end
 
   protected
-    
+
     def add_avatar(user, params)
       return if params[:avatar].blank?
       canvas.update_user(user['id'], { "user[avatar][url]" => params[:avatar] })
