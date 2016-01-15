@@ -21,8 +21,8 @@ class CanvasLoad < ActiveRecord::Base
   end
 
   def sis_profile
-      @sis_profile ||= self.canvas.get_profile_by_sis_id(self.sis_id)
-    end
+    @sis_profile ||= self.canvas.get_profile_by_sis_id(self.sis_id)
+  end
 
   def setup_welcome(sub_account_id = nil)
     # Check to see if Welcome course exists already
