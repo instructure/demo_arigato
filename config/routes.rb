@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     registrations: "registrations",
     omniauth_callbacks: "omniauth_callbacks"
   }
-  
+
   authenticate :user do
     resources :canvas_loads do
       member do

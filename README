@@ -5,7 +5,7 @@ This project makes it simple to populate a sample Canvas course using values fro
 
 Deployment
 -----------
-This application uses puma as a webserver. 
+This application uses puma as a webserver.
 Start with:
 
 rails server puma
@@ -30,7 +30,7 @@ This application uses PostgreSQL with ActiveRecord.
 
 ngrok
 -------------------------
-The OAuth keys used to sign into Canvas in development mode are tied to *.ngrok.com. 
+The OAuth keys used to sign into Canvas in development mode are tied to *.ngrok.com.
 Setup a local tunnel using any subdomain. In this case we chose to use 'arigato':
 
 ngrok --subdomain arigato 3005

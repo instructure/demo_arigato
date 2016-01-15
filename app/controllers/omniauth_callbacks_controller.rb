@@ -26,7 +26,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if request.env['omniauth.error'].present?
         flash[:error] = request.env['omniauth.error']
         redirect_after_error
-        return  
+        return
       end
       if request.env["omniauth.auth"].blank?
         # Keep these and use them for debugging omniauth.

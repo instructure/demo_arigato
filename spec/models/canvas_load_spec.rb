@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe CanvasLoad, :type => :model do
-  
+
   before do
     @provider_url = 'http://canvas.instructure.com'
     @user = FactoryGirl.create(:user)
@@ -60,4 +60,3 @@ RSpec.describe CanvasLoad, :type => :model do
   end
 
 end
-
