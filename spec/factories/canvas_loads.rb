@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :canvas_load do
     user
-    
+
   end
 end

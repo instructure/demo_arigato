@@ -1,6 +1,6 @@
 class Course < ActiveRecord::Base
   belongs_to :canvas_load
-  
+
   attr_accessor :is_selected
 
   def parsed

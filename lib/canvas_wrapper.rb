@@ -79,7 +79,7 @@ class CanvasWrapper
   def accounts
     api_get_request("accounts")
   end
-  
+
   def create_subaccount(params)
     api_post_request("accounts/#{account_id}/sub_accounts", params)
   end
@@ -188,7 +188,7 @@ class CanvasWrapper
   def user_activity(user_id)
     api_get_request("users/activity_stream?as_user_id=#{user_id}")
   end
-    
+
   def create_conversation(recipients, subject, body)
     api_post_request("conversations", {
       recipients: recipients,
