@@ -34,7 +34,7 @@ class CanvasLoad < ActiveRecord::Base
         name: welcome_to_canvas_name,
         sis_course_id: "welcome-to-canvas",
         status: "active",
-        cartridge: "https://dl.dropbox.com/s/mrpt7eaumialeel/welcome-to-canvas-master-export.imscc"
+        cartridge: "https://dl.dropbox.com/s/e1ma2pxy82iko0n/welcome-to-canvas-master-export.imscc"
       }.to_json)
       true
     end
