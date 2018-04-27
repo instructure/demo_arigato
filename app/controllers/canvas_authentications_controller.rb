@@ -1,5 +1,4 @@
 class CanvasAuthenticationsController < ApplicationController
-  respond_to :html
 
   def new
   end
