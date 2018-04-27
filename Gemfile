@@ -31,7 +31,7 @@ gem 'google-api-client'
 gem 'canvas-api'
 
 # JSON parser
-gem 'yajl-ruby', require: 'yajl'
+gem 'yajl-ruby', '~> 1.3.1', require: 'yajl'
 
 gem 'puma'
 
@@ -72,6 +72,6 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 3.9.0'
   gem 'webmock'
 end
