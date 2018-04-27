@@ -11,7 +11,7 @@ gem "pg"
 # UI
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 3.1.3'
 gem 'bootstrap-sass'
 gem 'font_assets' # sets headers and mimetypes for fonts in the asset pipeline
 gem 'autoprefixer-rails'
@@ -51,7 +51,6 @@ group :development do
   gem 'guard-rspec'
   gem 'hub', :require=>nil
   gem 'mail_view'
-  gem 'mailcatcher'
   gem 'quiet_assets'
   gem 'rails_apps_pages'
   gem 'rails_apps_testing'
