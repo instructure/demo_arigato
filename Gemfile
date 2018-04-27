@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-ruby '2.1.5'
+ruby '2.2.9'
 gem 'rails', '4.2.10'
 
 # Database
