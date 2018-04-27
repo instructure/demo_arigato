@@ -59,6 +59,7 @@ group :development do
   gem 'rb-fchange', :require=>false
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
+  gem 'web-console', '~> 2.0'
 end
 
 group :development, :test do
