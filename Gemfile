@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-ruby '2.1.5'
-gem 'rails', '4.1.7'
+ruby '2.2.9'
+gem 'rails', '4.2.10'
 
 # Database
 gem "pg"
@@ -11,7 +11,7 @@ gem "pg"
 # UI
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 3.1.3'
 gem 'bootstrap-sass'
 gem 'font_assets' # sets headers and mimetypes for fonts in the asset pipeline
 gem 'autoprefixer-rails'
@@ -20,8 +20,8 @@ gem "bower-rails"
 
 # authentication, authorization, integrations
 gem 'devise'
-gem 'omniauth', '~> 1.1.3'
-gem 'omniauth-canvas', '~> 0.0.4' #, :path => '~/projects/omniauth-canvas'
+gem 'omniauth', '~> 1.3.2'
+gem 'omniauth-canvas', '~> 0.1.3' #, :path => '~/projects/omniauth-canvas'
 gem 'omniauth-google-oauth2'
 gem 'oauth', '~> 0.4.6', :git => 'git://github.com/tatemae/oauth-ruby.git' #:path => '~/projects/other_apps/oauth-ruby'
 gem 'ims-lti', '~> 1.0.2' # IMS LTI tool consumers and providers
@@ -31,7 +31,7 @@ gem 'google-api-client'
 gem 'canvas-api'
 
 # JSON parser
-gem 'yajl-ruby', require: 'yajl'
+gem 'yajl-ruby', '~> 1.3.1', require: 'yajl'
 
 gem 'puma'
 
@@ -51,7 +51,6 @@ group :development do
   gem 'guard-rspec'
   gem 'hub', :require=>nil
   gem 'mail_view'
-  gem 'mailcatcher'
   gem 'quiet_assets'
   gem 'rails_apps_pages'
   gem 'rails_apps_testing'
@@ -59,6 +58,7 @@ group :development do
   gem 'rb-fchange', :require=>false
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
+  gem 'web-console', '~> 2.0'
 end
 
 group :development, :test do
@@ -72,6 +72,6 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 3.9.0'
   gem 'webmock'
 end
