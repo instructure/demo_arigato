@@ -182,7 +182,6 @@ class CanvasLoad < ActiveRecord::Base
     }
 
   rescue Canvas::ApiError => ex
-    debugger
     return {
       error: ex
     }
