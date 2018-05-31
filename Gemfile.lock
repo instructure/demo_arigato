@@ -49,6 +49,8 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.6)
     arel (6.0.4)
+    attr_encrypted (3.0.3)
+      encryptor (~> 3.0.0)
     autoparse (0.3.3)
       addressable (>= 2.3.1)
       extlib (>= 0.9.15)
@@ -100,6 +102,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    encryptor (3.0.0)
     erubis (2.7.0)
     ethon (0.7.1)
       ffi (>= 1.3.0)
@@ -350,6 +353,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  attr_encrypted (~> 3.0.0)
   autoprefixer-rails
   better_errors
   binding_of_caller
