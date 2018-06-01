@@ -65,6 +65,7 @@ class User < ActiveRecord::Base
   end
 
   def setup_authentication(auth)
+    credentials = auth.delete('credentials')
     attributes = {
       :uid => auth['uid'].to_s,
       :username => auth['info']['nickname'],
@@ -72,11 +73,10 @@ class User < ActiveRecord::Base
       :provider_url => UrlHelper.scheme_host(auth['info']['url']),
       :json_response => auth.to_json
     }
-    data = auth['credentials']
-    if data
-      attributes[:token] = data['token']
-      attributes[:secret] = data['secret']
-      attributes[:refresh_token] = data['refresh_token'] if data['refresh_token'] # Google sends a refresh token
+    if credentials
+      attributes[:token] = credentials['token']
+      attributes[:secret] = credentials['secret']
+      attributes[:refresh_token] = credentials['refresh_token'] if credentials['refresh_token'] # Google sends a refresh token
     end
     if self.persisted? && authentication = self.authentications.where({:provider => auth['provider'], :provider_url => auth['info']['url']}).first
       authentication.update_attributes!(attributes)

@@ -29,6 +29,7 @@ gem 'pundit'
 gem 'sendgrid'
 gem 'google-api-client'
 gem 'canvas-api'
+gem 'attr_encrypted', '~> 3.0.0'
 
 # JSON parser
 gem 'yajl-ruby', '~> 1.3.1', require: 'yajl'
