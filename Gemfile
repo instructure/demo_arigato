@@ -9,7 +9,7 @@ gem 'rails', '4.2.10'
 gem "pg"
 
 # UI
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 4.0.4'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails', '~> 3.1.3'
 gem 'bootstrap-sass'
