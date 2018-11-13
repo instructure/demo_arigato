@@ -172,7 +172,7 @@ GEM
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
-    loofah (2.2.2)
+    loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.9)
@@ -192,7 +192,7 @@ GEM
     multi_json (1.13.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    nokogiri (1.8.4)
+    nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     non-stupid-digest-assets (1.0.4)
     oauth2 (1.4.0)
@@ -377,6 +377,7 @@ DEPENDENCIES
   ims-lti (~> 1.0.2)
   jquery-rails (~> 3.1.3)
   launchy
+  loofah (>= 2.2.3)
   mail_view
   non-stupid-digest-assets
   oauth (~> 0.4.6)!
@@ -409,4 +410,4 @@ RUBY VERSION
    ruby 2.2.9p480
 
 BUNDLED WITH
-   1.16.1
+   1.16.5
