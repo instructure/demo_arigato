@@ -60,6 +60,7 @@ group :development do
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
   gem 'web-console', '~> 2.0'
+  gem 'loofah', '>= 2.2.3'
 end
 
 group :development, :test do
